@@ -7,13 +7,18 @@
 //返回：true
 
 
-struct ListNode* middleNode(struct ListNode* head) {//找中间节点，偶数个则返回靠后的一个
-    if (head == NULL) {
+struct ListNode* middleNode(struct ListNode* head) 
+{//找中间节点，偶数个则返回靠后的一个
+    if (head == NULL)
+    {
         return NULL;
-    } else {
+    } 
+    else 
+    {
         if (head->next == NULL)
             return head;
-        else {
+        else 
+        {
             struct ListNode* cur = head;
             int sum = 0;
             while (cur != NULL) {
@@ -30,10 +35,14 @@ struct ListNode* middleNode(struct ListNode* head) {//找中间节点，偶数�
     }
 
 }
-struct ListNode* reverseList(struct ListNode* head) {//倒置链表
-    if (head == NULL) {
+struct ListNode* reverseList(struct ListNode* head)
+{
+    //倒置链表
+    if (head == NULL) 
+    {
         return NULL;
-    } else {
+    }
+    else {
         if (head->next == NULL) {
             return head;
         } else {
@@ -55,25 +64,25 @@ struct ListNode* reverseList(struct ListNode* head) {//倒置链表
     }
 }
 class PalindromeList {
-  public:
-    bool chkPalindrome(ListNode* A) {
-struct ListNode* mid=middleNode(A);
-struct ListNode* rHead=reverseList(mid);
-struct ListNode* curA=A;
-struct ListNode* curR=rHead;
-while(curA&&curR)
-{
-    if(curA->val!=curR->val)
-    {
-        return false;
-    }
-    else {
-    curA=curA->next;
-    curR=curR->next;
-    }
-}
-return true;
+public:
+	bool chkPalindrome(ListNode* A) {
+		struct ListNode* mid = middleNode(A);
+		struct ListNode* rHead = reverseList(mid);
+		struct ListNode* curA = A;
+		struct ListNode* curR = rHead;
+		while (curA && curR)
+		{
+			if (curA->val != curR->val)
+			{
+				return false;
+			}
+			else {
+				curA = curA->next;
+				curR = curR->next;
+			}
+		}
+		return true;
 
 
-    }
+	}
 };
