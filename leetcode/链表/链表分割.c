@@ -39,3 +39,32 @@ while(cur)
         return pphead;
     }
 };
+
+struct ListNode* partition(struct ListNode* head, int x) {
+    struct ListNode* small = malloc(sizeof(struct ListNode));//充当尾节点
+    struct ListNode* smallHead = small;//记录头结点
+    struct ListNode* large = malloc(sizeof(struct ListNode));
+    struct ListNode* largeHead = large;
+    while(head!=NULL)//不用malloc新链表
+    {
+        if(head->val<x)
+        {
+            small->next=head;
+            small=small->next;
+        }
+        else
+        {
+            large->next=head;
+            large=large->next;
+        }
+        head=head->next;
+    }
+    large->next=NULL;
+    small->next=largeHead->next;
+    struct ListNode* tmp=smallHead->next;
+    free(smallHead);
+    free(largeHead);
+    return tmp;
+
+
+}
