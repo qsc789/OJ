@@ -1,29 +1,53 @@
-//Å£¿ÍBM2
-//½«Ò»¸ö½ÚµãÊýÎª size Á´±í m Î»ÖÃµ½ n Î»ÖÃÖ®¼äµÄÇø¼ä·´×ª£¬
-//ÀýÈç£º
-//¸ø³öµÄÁ´±í
-//1¡ú2¡ú3¡ú4¡ú5¡úNULL,
+//Å£ï¿½ï¿½BM2
+//ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½Îª size ï¿½ï¿½ï¿½ï¿½ m Î»ï¿½Ãµï¿½ n Î»ï¿½ï¿½Ö®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä·´×ªï¿½ï¿½
+//ï¿½ï¿½ï¿½ç£º
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+//1ï¿½ï¿½2ï¿½ï¿½3ï¿½ï¿½4ï¿½ï¿½5ï¿½ï¿½NULL,
 //m = 2, n = 4,
-//·µ»Ø
-//1¡ú4¡ú3¡ú2¡ú5¡úNULL.
+//ï¿½ï¿½ï¿½ï¿½
+//1ï¿½ï¿½4ï¿½ï¿½3ï¿½ï¿½2ï¿½ï¿½5ï¿½ï¿½NULL.
+struct ListNode* reverseBetween(struct ListNode* head, int m, int n ) {
+    if(head==NULL||head->next==NULL)
+    {
+        return head;
+    }
+    struct ListNode* res=malloc(sizeof(struct ListNode));
+    res->next=head;
+    struct ListNode* pre=res;
+    struct ListNode* cur=head;
+   
+    for(int i=1;i<m;i++)
+    {
+        pre=cur;
+        cur=cur->next;
+    }
+    for(int i=m;i<n;i++)
+    {
+       struct ListNode* temp=cur->next;
+       cur->next=temp->next;
+       temp->next=pre->next;
+       pre->next=temp;
+    }
+    return res->next;
+}
 
 struct ListNode* reverseBetween(struct ListNode* head, int m, int n) {
     // write code here
     if (head->next == NULL || head == NULL)
         return head;
     struct ListNode* H = malloc(sizeof(struct ListNode));
-    H->next = head;//ÉÚ±øÎ»
+    H->next = head;//ï¿½Ú±ï¿½Î»
     struct ListNode* p, * temp, * cur = H;
-    //¶¨Î»·´×ªÇø¼ä
+    //ï¿½ï¿½Î»ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½
     for (int i = 0; i < m - 1; i++)
     {
         cur = cur->next;
     }
-    temp = cur;//Çø¼äµÄÍ·½áµã
+    temp = cur;//ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½
     struct ListNode* q;
-    cur = cur->next;//·´×ªÇø¼äµÚÒ»¸ö½Úµã
-    q = cur;//±£´æ·´×ªÇø¼äµÚÒ»¸ö½Úµã
-    //Í·²å·¨·´×ªÁ´±í
+    cur = cur->next;//ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Úµï¿½
+    q = cur;//ï¿½ï¿½ï¿½æ·´×ªï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Úµï¿½
+    //Í·ï¿½å·¨ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½
     for (int i = 0; i < n - m + 1; i++)
     {
         p = cur;
@@ -31,7 +55,7 @@ struct ListNode* reverseBetween(struct ListNode* head, int m, int n) {
         p->next = temp->next;
         temp->next = p;
     }
-    q->next = cur;//·´×ªÇø¼äµÚÒ»¸ö½ÚµãÓëÔ­Á´±í·´×ªÇø¼äºóµÄµÚÒ»¸ö½ÚµãÏàÁ¬
+    q->next = cur;//ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½Ò»ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½
     struct ListNode* newHead = H->next;
     free(H);
     return newHead;
